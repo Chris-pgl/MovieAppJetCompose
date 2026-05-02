@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+//TODO refactory project
 @Composable
 fun MyApp(
     modifier: Modifier = Modifier, 
