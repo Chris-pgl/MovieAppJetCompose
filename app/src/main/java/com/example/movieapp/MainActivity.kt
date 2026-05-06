@@ -7,10 +7,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.movieapp.ui.theme.MovieAppTheme
 
@@ -29,24 +31,29 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-//TODO refactory project
+
 @Composable
 fun MyApp(
     modifier: Modifier = Modifier, 
     content: @Composable () -> Unit
-) {
-    // Usiamo un Box o un Surface per applicare il modifier
-    Box(modifier = modifier) {
-        content()
+){
+    content()
+}
+
+@Composable
+fun MainContent(){
+    Scaffold(containerColor = MaterialTheme.colorScheme.background) {
+        innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            Text("MainContent")
+        }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    MovieAppTheme {
-        MyApp {
-            Text("Preview")
-        }
+@Preview(showBackground = true)
+fun MyAppPreview() {
+    MyApp() {
+        Text("Contenuto della Movie AppPre")
     }
 }
