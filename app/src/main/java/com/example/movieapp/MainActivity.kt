@@ -1,9 +1,11 @@
 package com.example.movieapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -92,18 +94,24 @@ fun MainContent(
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn {
             items(movieList) {
-                MovieRow(movie = it)
+                MovieRow(movie = it){ movie ->
+                    Log.d("Movie", "MainContent: $movie ")
+                }
             }
         }
     }
 }
 
 @Composable
-fun MovieRow(movie: String){
+fun MovieRow(movie: String, onItemClick: (String)-> Unit ){
     Card(modifier = Modifier
         .padding(4.dp)
         .fillMaxWidth()
-        .height(130.dp),
+        .height(130.dp)
+        .clickable {
+            onItemClick(movie)
+            println("Clicked on $movie")
+        },
         shape = RoundedCornerShape(corner = CornerSize(12.dp)),
         /*
         colors = CardDefaults.cardColors(
@@ -118,8 +126,8 @@ fun MovieRow(movie: String){
             horizontalArrangement = Arrangement.Start
         ) {
             Surface(modifier = Modifier
-                    .padding(12.dp)
-                    .size(100.dp),
+                .padding(12.dp)
+                .size(100.dp),
                 shape = RectangleShape,
                 shadowElevation = 6.dp) {
                 Icon(imageVector = Icons.Default.AccountBox,
