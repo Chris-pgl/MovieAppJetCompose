@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.movieapp.navigation.MovieScreens
 
 
 /**
@@ -77,6 +78,8 @@ fun MainContent(
         LazyColumn {
             items(movieList) {
                 MovieRow(movie = it){ movie ->
+                    //qui passo il navController per navigare
+                    navController.navigate(route = MovieScreens.Details.route+"/$movie")
                     Log.d("Movie", "MainContent: $movie ")
                 }
             }
