@@ -38,6 +38,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.RectangleShape
+import com.example.movieapp.navigation.MovieNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MovieAppTheme {
                     MyApp{
-                        MainContent()
+                        MovieNavigation()
                     }
                 }
             }
@@ -61,83 +62,10 @@ fun MyApp(
     content: @Composable () -> Unit
 ){
     MovieAppTheme{
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("Movie App")},
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Color(0xFF2196F3)
-                    )
-                )
-            }
-        ){innerPadding ->
-            Box(
-                modifier = Modifier.padding(innerPadding)
-            ){
-                content()
-            }
-        }
+        content()
     }
 }
 
-@Composable
-fun MainContent(
-    movieList: List<String> = listOf(
-        "Avatar",
-        "300",
-        "Harry Potter",
-        "Life",
-        "Matrix",
-        "Inception"
-    )
-) {
-    Column(modifier = Modifier.padding(12.dp)) {
-        LazyColumn {
-            items(movieList) {
-                MovieRow(movie = it){ movie ->
-                    Log.d("Movie", "MainContent: $movie ")
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun MovieRow(movie: String, onItemClick: (String)-> Unit ){
-    Card(modifier = Modifier
-        .padding(4.dp)
-        .fillMaxWidth()
-        .height(130.dp)
-        .clickable {
-            onItemClick(movie)
-            println("Clicked on $movie")
-        },
-        shape = RoundedCornerShape(corner = CornerSize(12.dp)),
-        /*
-        colors = CardDefaults.cardColors(
-            containerColor = Color.LightGray
-        ),
-         */
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 12.dp)
-    ){
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-        ) {
-            Surface(modifier = Modifier
-                .padding(12.dp)
-                .size(100.dp),
-                shape = RectangleShape,
-                shadowElevation = 6.dp) {
-                Icon(imageVector = Icons.Default.AccountBox,
-                    contentDescription = "Movie Image")
-            }
-            Text(movie)
-        }
-
-    }
-}
 
 //TODO Add navigation
 
@@ -145,6 +73,6 @@ fun MovieRow(movie: String, onItemClick: (String)-> Unit ){
 @Preview(showBackground = true)
 fun MyAppPreview() {
     MyApp() {
-        MainContent()
+        MovieNavigation()
     }
 }
