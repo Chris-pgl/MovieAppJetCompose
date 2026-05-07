@@ -139,6 +139,7 @@ fun MovieRow(movie: String, onItemClick: (String)-> Unit ){
     }
 }
 
+//TODO Add navigation
 
 @Composable
 @Preview(showBackground = true)
